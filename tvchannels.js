@@ -41,7 +41,11 @@ class ChannelManager {
     // Remove a channel from the management system.  If the channel does not exist, the
     // method will throw a ChannelNotFound exception.
     deleteChannel(chNum) {
-
+        const foundChannel = this.#allChannels.find((x) => x.channel == chNum);
+        if (!foundChannel) {
+            throw new ChannelNotFoundException(`ChannelNotFoundException: Removing channel ${chNum}`);
+        }
+        this.#allChannels = this.#allChannels.filter((ch) => ch.channel !== chNum);
     }
 
     // Returns the number of channels.
@@ -54,7 +58,11 @@ class ChannelManager {
     // ask again for the same TV channel, you will not see the change that you just made.  If the
     // channel does not exist you will get back undefined.
     getChannel(chNum) {
-
+        const foundChannel = this.#allChannels.find((x) => x.channel == chNum);
+        if (!foundChannel) {
+            return undefined;
+        }
+        return { ...foundChannel };
     }
 
     // Add the channel number to the subscriptions.  The function returns true if
