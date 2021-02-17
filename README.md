@@ -9,4 +9,3 @@
 | countSubscribedChannel() | Aahmad | Asmar |
 | nextSubscribedChannel() | Aahmad | Mahmoud |
 | prevSubscribedChannel() | Aahmad | Mahmoud |
-| -------- | ---------- | ------ |
