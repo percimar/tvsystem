@@ -12,15 +12,19 @@
     "jest": "^26.6.3",
     "jest-html-reporter": "^3.3.0"
   },
-  "jest": {    
+  "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["lcov"],
-    "reporters": ["default",
-       ["./node_modules/jest-html-reporter", 
-        {        
+    "coverageReporters": [
+      "lcov"
+    ],
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
           "pageTitle": "Test Report"
         }
-       ]
       ]
+    ]
   }
 }

@@ -71,21 +71,21 @@ class ChannelManager {
     // the operation was successful and false if the channel was not already subscribed.
     // No exception is thrown.
     subscribeChannel(chNum) {
-        const foundChannel = this.#allChannels.find((x) => x.channel == chNum);
+        const foundChannel = this.#subscribedChannels.find((x) => x.channel == chNum);
         if (!foundChannel) {
-            throw new ChannelNotFoundException(`ChannelNotFoundException: Subscribing channel ${chNum}`);
+            return false
         }
         this.#subscribedChannels.push(foundChannel)
+        return true
     }
 
     // Unsubscribe from the channel.  If the channel is not currently subscribed this
     // operation is ignored.
     unsubscribeChannel(chNum) {
         const foundChannel = this.#subscribedChannels.find((x) => x.channel == chNum);
-        if (!foundChannel) {
-            throw new ChannelNotFoundException(`ChannelNotFoundException: Unsubscribing channel ${chNum}`);
+        if (foundChannel) {
+            this.#subscribedChannels = this.#subscribedChannels.filter(item => item.channel !== foundChannel.channel);
         }
-        this.#subscribedChannels = this.#subscribedChannels.filter(item => item.channel !== foundChannel.channel);
     }
 
     // Return the number of currently subscribed channels
