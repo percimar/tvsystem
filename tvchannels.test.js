@@ -1,3 +1,4 @@
+const { test, expect, describe } = require("@jest/globals")
 const { TVChannel, ChannelManager } = require("./tvchannels")
 
 test('Initializing Channel Manager', () => {
