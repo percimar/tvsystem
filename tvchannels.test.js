@@ -120,8 +120,8 @@ describe('Subscribe Tests', () => {
             manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
             manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
             manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
-            let nextchannelNum = manager.nextSubscribedChannel(853)
-            expect(nextchannelNum).toBe(294)
+            let prevchannelNum = manager.nextSubscribedChannel(853)
+            expect(prevchannelNum).toBe(294)
         }
         catch (e) {
             exceptionThrown = true
