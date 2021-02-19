@@ -97,36 +97,69 @@ describe('Retrieve Tests', () => {
 
 describe('Subscribe Tests', () => {
 
-    test('Next Subscribed Channel Check', () => {
-        let exceptionThrown = false
-        try {
+    describe('Next Tests', () => {
+
+        test('Next Subscribed Channel Check', () => {
             let manager = new ChannelManager()
             manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
             manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
             manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
-            let nextchannelNum = manager.nextSubscribedChannel(853)
-            expect(nextchannelNum).toBe(365)
-        }
-        catch (e) {
-            exceptionThrown = true
-        }
-        expect(exceptionThrown).toBe(true)
+            manager.subscribeChannel(294)
+            manager.subscribeChannel(853)
+            manager.subscribeChannel(365)
+            expect(manager.nextSubscribedChannel(853).channel).toBe(365);
+        })
+
+        test('Next Non-existent Subscribed Channel Check', () => {
+            let manager = new ChannelManager()
+            manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+            expect(manager.nextSubscribedChannel(853).channel).toThrow("NoSubscribedChannels")
+        })
+
+        test('Next Unsubscribed Channel Check', () => {
+            let manager = new ChannelManager()
+            manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+            manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+            manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+            manager.subscribeChannel(294)
+            manager.subscribeChannel(853)
+            manager.subscribeChannel(365)
+            manager.unsubscribeChannel(853)
+            expect(manager.nextSubscribedChannel(294).channel).toBe(365);
+        })
+
     })
 
-    test('Previous Subscribed Channel Check', () => {
-        let exceptionThrown = false
-        try {
+    describe('Previous Tests', () => {
+        test('Previous Subscribed Channel Check', () => {
             let manager = new ChannelManager()
             manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
             manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
             manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
-            let prevchannelNum = manager.nextSubscribedChannel(853)
-            expect(prevchannelNum).toBe(294)
-        }
-        catch (e) {
-            exceptionThrown = true
-        }
-        expect(exceptionThrown).toBe(true)
+            manager.subscribeChannel(294)
+            manager.subscribeChannel(853)
+            manager.subscribeChannel(365)
+            expect(manager.nextSubscribedChannel(853).channel).toBe(294);
+        })
+
+        test('Previouse Non-existent Subscribed Channel Check', () => {
+            let manager = new ChannelManager()
+            manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+            expect(manager.previousSubscribedChannel(853).channel).toThrow("NoSubscribedChannels")
+        })
+
+        test('Previous Unsubscribed Channel Check', () => {
+            let manager = new ChannelManager()
+            manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+            manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+            manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+            manager.subscribeChannel(294)
+            manager.subscribeChannel(853)
+            manager.subscribeChannel(365)
+            manager.unsubscribeChannel(853)
+            expect(manager.nextSubscribedChannel(365).channel).toBe(294);
+        })
+
     })
 
 })
