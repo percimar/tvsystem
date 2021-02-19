@@ -34,3 +34,8 @@ test('Subscribing to subscribed channel returns false', () => {
     expect(manager.subscribeChannel(294)).toBe(false);
 })
 
+test('Subscribing to non-existing channel returns false', () => {
+    const manager = new ChannelManager();
+    expect(manager.subscribeChannel(1)).toBe(false);
+})
+
