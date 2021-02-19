@@ -68,11 +68,11 @@ class ChannelManager {
     }
 
     // Add the channel number to the subscriptions.  The function returns true if
-    // the operation was successful and false if the channel was not already subscribed.
+    // the operation was successful and false if the channel was already subscribed.
     // No exception is thrown.
     subscribeChannel(chNum) {
         const foundChannel = this.#subscribedChannels.find((x) => x.channel == chNum);
-        if (!foundChannel) {
+        if (foundChannel) {
             return false
         }
         this.#subscribedChannels.push(foundChannel)
