@@ -39,3 +39,41 @@ test('Subscribing to non-existing channel returns false', () => {
     expect(manager.subscribeChannel(1)).toBe(false);
 })
 
+test('Subscribed count starts at 0', () => {
+    const manager = new ChannelManager();
+    expect(manager.countSubcribedChannels()).toBe(0);
+    manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+    manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+    manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+    expect(manager.countSubcribedChannels()).toBe(0);
+})
+
+test('Adding channels increments subscribed count', () => {
+    const manager = new ChannelManager();
+    manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+    manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+    manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+    manager.subscribeChannel(294);
+    expect(manager.countSubcribedChannels()).toBe(1);
+    manager.subscribeChannel(853);
+    manager.subscribeChannel(365);
+    expect(manager.countSubcribedChannels()).toBe(3);
+})
+
+test('Unsubscribing properly decrements subscribed count', () => {
+    const manager = new ChannelManager();
+    manager.unsubscribeChannel(294);
+    manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+    manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+    manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+    manager.unsubscribeChannel(294);
+    expect(manager.countSubcribedChannels()).toBe(0);
+    manager.subscribeChannel(294);
+    manager.subscribeChannel(853);
+    manager.subscribeChannel(365);
+    manager.unsubscribeChannel(294);
+    expect(manager.countSubcribedChannels()).toBe(2);
+    manager.unsubscribeChannel(853);
+    manager.unsubscribeChannel(365);
+    expect(manager.countSubcribedChannels()).toBe(0);
+})
