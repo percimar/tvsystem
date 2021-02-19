@@ -91,7 +91,7 @@ class ChannelManager {
 
     // Return the number of currently subscribed channels
     countSubcribedChannels() {
-
+        return this.#subscribedChannels.length;
     }
 
     // Return the cost (total) of all currently subscribed channels
