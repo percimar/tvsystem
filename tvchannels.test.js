@@ -196,7 +196,7 @@ describe('prevSubscribedChannel() Tests', () => {
         manager.subscribeChannel(294)
         manager.subscribeChannel(365)
         manager.subscribeChannel(853)
-        expect(manager.previousSubscribedChannel(853).channel).toBe(365);
+        expect(manager.previousSubscribedChannel(294).channel).toBe(853);
     })
 
     test('Previouse Non-existent Subscribed Channel Check', () => {
@@ -216,10 +216,10 @@ describe('prevSubscribedChannel() Tests', () => {
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
         manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
         manager.subscribeChannel(294)
-        manager.subscribeChannel(853)
         manager.subscribeChannel(365)
-        manager.unsubscribeChannel(853)
-        expect(manager.previousSubscribedChannel(365).channel).toBe(294);
+        manager.subscribeChannel(853)
+        manager.unsubscribeChannel(365)
+        expect(manager.previousSubscribedChannel(853).channel).toBe(294);
     })
 
 })
