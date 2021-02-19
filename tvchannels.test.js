@@ -94,8 +94,11 @@ describe('countSubcribedChannels() Tests', () => {
     test('Count returns the count of subscribed channels', () => {
         const manager = new ChannelManager();
         manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
-        const count = manager.countSubcribedChannels().length;
-        expect(count).toBe(1);
+        manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'))
+        manager.subscribeChannel(294)
+        manager.subscribeChannel(365)
+        const count = manager.countSubcribedChannels();
+        expect(count).toBe(2);
     })
 
 })
