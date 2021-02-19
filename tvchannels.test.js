@@ -78,19 +78,21 @@ test('Unsubscribing properly decrements subscribed count', () => {
     manager.unsubscribeChannel(365);
     expect(manager.countSubcribedChannels()).toBe(0);
 
-    describe('Retrieve Tests', () => {
+})
 
-        test('Get Channel', () => {
-            let manager = new ChannelManager()
-            manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'))
-            let result = manager.getChannel(294)
-            expect(result.channel).toBe(294)
-        })
+describe('Retrieve Tests', () => {
 
-        test('Get Non-existent Channel', () => {
-            let manager = new ChannelManager()
-            let result = manager.getChannel(99999999)
-            expect(result).toBe(undefined)
-        })
-
+    test('Get Channel', () => {
+        let manager = new ChannelManager()
+        manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'))
+        let result = manager.getChannel(294)
+        expect(result.channel).toBe(294)
     })
+
+    test('Get Non-existent Channel', () => {
+        let manager = new ChannelManager()
+        let result = manager.getChannel(99999999)
+        expect(result).toBe(undefined)
+    })
+
+})
