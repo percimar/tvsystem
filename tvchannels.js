@@ -96,7 +96,7 @@ class ChannelManager {
 
     // Return the cost (total) of all currently subscribed channels
     totalSubscribedCost() {
-
+        return this.#subscribedChannels.reduce((sum, ch) => sum += ch.price, 0);
     }
 
     // Returns the next subscribed channel (in order).  Suppose you are
