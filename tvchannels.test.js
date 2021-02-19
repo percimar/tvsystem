@@ -89,6 +89,34 @@ describe('subscribeChannel() Tests', () => {
 
 })
 
+describe('unsubscribeChannel() Tests', () => {
+
+    test('Unsubscribing from subscribed channel', () => {
+        const manager = new ChannelManager();
+        manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+        manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+        manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+
+        manager.subscribeChannel(294);
+        manager.subscribeChannel(853);
+        manager.subscribeChannel(365);
+
+        expect(manager.unsubscribeChannel(294)).toBeUndefined();
+        expect(manager.countSubcribedChannels()).toBe(2);
+        expect(manager.totalSubscribedCost()).toBe(12);
+    })
+
+    test('Unsubscribing from not subscribed channels does not throw error', () => {
+        const manager = new ChannelManager();
+        manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+        manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+        manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+
+        expect(manager.unsubscribeChannel(294)).toBeUndefined();
+        expect(() => manager.unsubscribeChannel(294)).not.toThrow();
+    })
+
+})
 
 describe('nextSubscribedChannel() Tests', () => {
 
