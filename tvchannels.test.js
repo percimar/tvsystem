@@ -89,6 +89,33 @@ describe('subscribeChannel() Tests', () => {
 
 })
 
+describe('countSubcribedChannels() Tests', () => {
+
+    test('Count returns the count of subscribed channels', () => {
+        const manager = new ChannelManager();
+        manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+        const count = manager.countSubcribedChannels().length;
+        expect(count).toBe(1);
+    })
+
+})
+
+describe('totalSubscribedCost() Tests', () => {
+
+    test('Total returns the total cost of all subscribed channels', () => {
+        const manager = new ChannelManager();
+        manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'))
+        manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'))
+        manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'))
+        manager.subscribeChannel(365)
+        manager.subscribeChannel(853)
+        manager.subscribeChannel(294)
+        const count = manager.totalSubscribedCost();
+        expect(count).toBe(13);
+    })
+
+})
+
 describe('unsubscribeChannel() Tests', () => {
 
     test('Unsubscribing from subscribed channel', () => {
