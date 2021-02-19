@@ -71,8 +71,9 @@ class ChannelManager {
     // the operation was successful and false if the channel was already subscribed.
     // No exception is thrown.
     subscribeChannel(chNum) {
-        const foundChannel = this.#subscribedChannels.find((x) => x.channel == chNum);
-        if (foundChannel) {
+        const foundChannel = this.#allChannels.find((x) => x.channel == chNum);
+        const foundSubChannel = this.#subscribedChannels.find((x) => x.channel == chNum);
+        if (!foundChannel || foundSubChannel) {
             return false
         }
         this.#subscribedChannels.push(foundChannel)
