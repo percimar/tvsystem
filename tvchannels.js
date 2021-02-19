@@ -21,10 +21,10 @@ class ChannelNotFoundException extends Error {
     }
 }
 
-class NoSubscribedChannelException extends Error {
+class NoSubscribedChannelsException extends Error {
     constructor(message) {
         super(message)
-        this.name = 'NoSubscribedChannelException'
+        this.name = 'NoSubscribedChannelsException'
     }
 }
 
@@ -116,7 +116,7 @@ class ChannelManager {
             throw new ChannelNotFoundException(`ChannelNotFoundException: There is no channel with this number`);
         }
         if (this.#subscribedChannels.length === 0) {
-            throw new NoSubscribedChannelException(`NoSubscribedChannelException: You have not subscribed to any channels`);
+            throw new NoSubscribedChannelsException(`NoSubscribedChannelsException: You have not subscribed to any channels`);
         }
         else {
             const nextChannel = () => {
@@ -144,7 +144,7 @@ class ChannelManager {
             throw new ChannelNotFoundException(`ChannelNotFoundException: There is no channel with this number`);
         }
         if (this.#subscribedChannels.length === 0) {
-            throw new NoSubscribedChannelException(`NoSubscribedChannelException: You have not subscribed to any channels`);
+            throw new NoSubscribedChannelsException(`NoSubscribedChannelsException: You have not subscribed to any channels`);
         }
         else {
             const prevChannel = () => {
