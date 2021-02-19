@@ -153,15 +153,15 @@ describe('nextSubscribedChannel() Tests', () => {
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
         manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
         manager.subscribeChannel(294)
-        manager.subscribeChannel(853)
         manager.subscribeChannel(365)
-        expect(manager.nextSubscribedChannel(853).channel).toBe(365);
+        manager.subscribeChannel(853)
+        expect(manager.nextSubscribedChannel(853).channel).toBe(294);
     })
 
     test('Next Non-existent Subscribed Channel Check', () => {
         let manager = new ChannelManager()
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
-        expect(manager.nextSubscribedChannel(853).channel).toThrow("NoSubscribedChannels")
+        expect(() => { manager.nextSubscribedChannel(853).channel }).toThrow("NoSubscribedChannelsException")
     })
 
     test('Next Unsubscribed Channel Check', () => {
@@ -170,10 +170,10 @@ describe('nextSubscribedChannel() Tests', () => {
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
         manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
         manager.subscribeChannel(294)
-        manager.subscribeChannel(853)
         manager.subscribeChannel(365)
-        manager.unsubscribeChannel(853)
-        expect(manager.nextSubscribedChannel(294).channel).toBe(365);
+        manager.subscribeChannel(853)
+        manager.unsubscribeChannel(365)
+        expect(manager.nextSubscribedChannel(294).channel).toBe(853);
     })
 
 })
@@ -194,7 +194,7 @@ describe('prevSubscribedChannel() Tests', () => {
     test('Previouse Non-existent Subscribed Channel Check', () => {
         let manager = new ChannelManager()
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
-        expect(manager.previousSubscribedChannel(853).channel).toThrow("NoSubscribedChannels")
+        expect(() => { manager.previousSubscribedChannel(853).channel }).toThrow("NoSubscribedChannelsException")
     })
 
     test('Previous Unsubscribed Channel Check', () => {
