@@ -21,3 +21,22 @@ test('Adding duplicate channels throws DuplicateChannelException', () => {
     manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
     expect(() => manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'))).toThrow("DuplicateChannelException");
 })
+
+test('Subscribing to channel returns true', () => {
+    const manager = new ChannelManager();
+    manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+    expect(manager.subscribeChannel(294)).toBe(true);
+})
+
+test('Subscribing to subscribed channel returns false', () => {
+    const manager = new ChannelManager();
+    manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+    manager.subscribeChannel(294);
+    expect(manager.subscribeChannel(294)).toBe(false);
+})
+
+test('Subscribing to non-existing channel returns false', () => {
+    const manager = new ChannelManager();
+    expect(manager.subscribeChannel(1)).toBe(false);
+})
+
