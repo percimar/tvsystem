@@ -120,12 +120,11 @@ class ChannelManager {
         }
         else {
             const nextChannel = () => {
-                let sorted = this.#subscribedChannels.sort((a, b) => (a.channel > b.channel) ? 1 : -1)
+                let sorted = this.#subscribedChannels.sort((a, b) => (a.channel - b.channel))
                 let x = sorted.indexOf(foundChannel) + 1
                 if (x >= this.#subscribedChannels.length) {
                     x = 0
                 }
-                console.log(this.#subscribedChannels.length)
                 return (sorted[x])
             }
             const next = nextChannel();
@@ -148,7 +147,7 @@ class ChannelManager {
         }
         else {
             const prevChannel = () => {
-                let sorted = this.#subscribedChannels.sort((a, b) => (a.channel > b.channel) ? 1 : -1)
+                let sorted = this.#subscribedChannels.sort((a, b) => (a.channel - b.channel))
                 let x = sorted.indexOf(foundChannel) - 1
                 if (x < 0) {
                     x = this.#subscribedChannels.length - 1
