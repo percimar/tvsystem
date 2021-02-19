@@ -93,3 +93,40 @@ describe('Retrieve Tests', () => {
     })
 
 })
+
+
+describe('Subscribe Tests', () => {
+
+    test('Next Subscribed Channel Check', () => {
+        let exceptionThrown = false
+        try {
+            let manager = new ChannelManager()
+            manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+            manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+            manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+            let nextchannelNum = manager.nextSubscribedChannel(853)
+            expect(nextchannelNum).toBe(365)
+        }
+        catch (e) {
+            exceptionThrown = true
+        }
+        expect(exceptionThrown).toBe(true)
+    })
+
+    test('Previous Subscribed Channel Check', () => {
+        let exceptionThrown = false
+        try {
+            let manager = new ChannelManager()
+            manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'));
+            manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
+            manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'));
+            let nextchannelNum = manager.nextSubscribedChannel(853)
+            expect(nextchannelNum).toBe(294)
+        }
+        catch (e) {
+            exceptionThrown = true
+        }
+        expect(exceptionThrown).toBe(true)
+    })
+
+})
