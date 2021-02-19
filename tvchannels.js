@@ -21,6 +21,12 @@ class ChannelNotFoundException extends Error {
     }
 }
 
+class NoSubscribedChannelException extends Error {
+    constructor(message) {
+        super(message)
+        this.name = 'NoSubscribedChannelException'
+    }
+}
 
 class ChannelManager {
     #allChannels
@@ -105,7 +111,26 @@ class ChannelManager {
     // If there are no currently subscribed channels, this function will throw the exception
     // NoSubscribedChannels.
     nextSubscribedChannel(currentCh) {
-
+        const foundChannel = this.#allChannels.find((x) => x.channel == currentCh);
+        if (!foundChannel) {
+            throw new ChannelNotFoundException(`ChannelNotFoundException: There is no channel with this number`);
+        }
+        if (this.#subscribedChannels.length === 0) {
+            throw new NoSubscribedChannelException(`NoSubscribedChannelException: You have not subscribed to any channels`);
+        }
+        else {
+            const nextChannel = () => {
+                let sorted = this.#subscribedChannels.sort((a, b) => (a.channel > b.channel) ? 1 : -1)
+                let x = sorted.indexOf(foundChannel) + 1
+                if (x >= this.#subscribedChannels.length) {
+                    x = 0
+                }
+                console.log(this.#subscribedChannels.length)
+                return (sorted[x])
+            }
+            const next = nextChannel();
+            return ({ ...next })
+        }
     }
 
     // Returns the previous subscribed channel (in order).  Suppose you are
@@ -114,7 +139,25 @@ class ChannelManager {
     // If there are no currently subscribed channels, this function will throw the exception
     // NoSubscribedChannels.
     previousSubscribedChannel(currentCh) {
-
+        const foundChannel = this.#allChannels.find((x) => x.channel == currentCh);
+        if (!foundChannel) {
+            throw new ChannelNotFoundException(`ChannelNotFoundException: There is no channel with this number`);
+        }
+        if (this.#subscribedChannels.length === 0) {
+            throw new NoSubscribedChannelException(`NoSubscribedChannelException: You have not subscribed to any channels`);
+        }
+        else {
+            const prevChannel = () => {
+                let sorted = this.#subscribedChannels.sort((a, b) => (a.channel > b.channel) ? 1 : -1)
+                let x = sorted.indexOf(foundChannel) - 1
+                if (x < 0) {
+                    x = this.#subscribedChannels.length - 1
+                }
+                return (sorted[x])
+            }
+            const prev = prevChannel();
+            return ({ ...prev })
+        }
     }
 
 }

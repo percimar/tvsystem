@@ -32,7 +32,8 @@ const manager = new ChannelManager()
 manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'))
 manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'))
 manager.addChannel(new TVChannel(365, 'Russia Today', 5, 'News'))
-console.log(manager.countChannels())
-const returnedCh = manager.getChannel(294);
-returnedCh.channel = 400;
-const baseCh = manager.getChannel(294);
+// manager.subscribeChannel(365)
+// manager.subscribeChannel(294)
+manager.countSubcribedChannels()
+console.log(manager.previousSubscribedChannel(555))
+
