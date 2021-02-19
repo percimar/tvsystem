@@ -2,10 +2,9 @@
 
 | Function | Code Owner | Tester |
 | -------- | ---------- | ------ |
-| deleteChannel() | Asmar | Aahmad |
-| getChannel() | Asmar | Mahmoud |
 | subscribeChannel() | Mahmoud | Asmar |
-| unsubscribeChannel() | Mahmoud | Aahmad |
-| countSubscribedChannel() | Aahmad | Asmar |
+| unsubscribeChannel() | Mahmoud | Asmar |
+| countSubscribedChannel() | Asmar | Aahmad |
+| totalSubscribedCost() | Asmar | Aahmad |
 | nextSubscribedChannel() | Aahmad | Mahmoud |
 | prevSubscribedChannel() | Aahmad | Mahmoud |
