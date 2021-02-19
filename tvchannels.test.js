@@ -40,3 +40,20 @@ test('Subscribing to non-existing channel returns false', () => {
     expect(manager.subscribeChannel(1)).toBe(false);
 })
 
+
+describe('Retrieve Tests', () => {
+
+    test('Get Channel', () => {
+        let manager = new ChannelManager()
+        manager.addChannel(new TVChannel(294, 'M+', 1, 'Music'))
+        let result = manager.getChannel(294)
+        expect(result.channel).toBe(294)
+    })
+
+    test('Get Non-existent Channel', () => {
+        let manager = new ChannelManager()
+        let result = manager.getChannel(99999999)
+        expect(result).toBe(undefined)
+    })
+
+})
