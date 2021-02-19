@@ -24,8 +24,10 @@ class ChannelNotFoundException extends Error {
 
 class ChannelManager {
     #allChannels
+    #subscribedChannels
     constructor() {
         this.#allChannels = []
+        this.#subscribedChannels = []
     }
 
     // Add a new channel to the management system.  If a channel already exists with the
@@ -69,7 +71,11 @@ class ChannelManager {
     // the operation was successful and false if the channel was not already subscribed.
     // No exception is thrown.
     subscribeChannel(chNum) {
-
+        const foundChannel = this.#allChannels.find((x) => x.channel == chNum);
+        if (!foundChannel) {
+            throw new ChannelNotFoundException(`ChannelNotFoundException: Subscribing channel ${chNum}`);
+        }
+        this.#subscribedChannels.push(foundChannel)
     }
 
     // Unsubscribe from the channel.  If the channel is not currently subscribed this
