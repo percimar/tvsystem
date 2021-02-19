@@ -81,7 +81,11 @@ class ChannelManager {
     // Unsubscribe from the channel.  If the channel is not currently subscribed this
     // operation is ignored.
     unsubscribeChannel(chNum) {
-
+        const foundChannel = this.#subscribedChannels.find((x) => x.channel == chNum);
+        if (!foundChannel) {
+            throw new ChannelNotFoundException(`ChannelNotFoundException: Unsubscribing channel ${chNum}`);
+        }
+        this.#subscribedChannels = this.#subscribedChannels.filter(item => item.channel !== foundChannel.channel);
     }
 
     // Return the number of currently subscribed channels
