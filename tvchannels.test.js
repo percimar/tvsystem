@@ -134,7 +134,7 @@ describe('nextSubscribedChannel() Tests', () => {
     test('Next Non-existent Subscribed Channel Check', () => {
         let manager = new ChannelManager()
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
-        expect(manager.nextSubscribedChannel(853).channel).toThrow("NoSubscribedChannels")
+        expect(manager.nextSubscribedChannel(853).channel).toThrow("NoSubscribedChannelsException")
     })
 
     test('Next Unsubscribed Channel Check', () => {
@@ -167,7 +167,7 @@ describe('prevSubscribedChannel() Tests', () => {
     test('Previouse Non-existent Subscribed Channel Check', () => {
         let manager = new ChannelManager()
         manager.addChannel(new TVChannel(853, 'Zee Aflam', 7, 'Movies'));
-        expect(manager.previousSubscribedChannel(853).channel).toThrow("NoSubscribedChannels")
+        expect(manager.previousSubscribedChannel(853).channel).toThrow("NoSubscribedChannelsException")
     })
 
     test('Previous Unsubscribed Channel Check', () => {
